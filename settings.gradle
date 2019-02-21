@@ -1,0 +1,5 @@
+rootProject.name = 'demo-cloud'
+include 'demo-eureka'
+include 'demo-service-client'
+include 'demo-service-server'
+
