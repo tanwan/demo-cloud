@@ -49,6 +49,8 @@ allprojects {
 
 subprojects {
     dependencies {
+        //gson
+        implementation group: 'com.google.code.gson', name: 'gson', version: project['gson.version']
         //jackson
         implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: project['jackson.version']
 

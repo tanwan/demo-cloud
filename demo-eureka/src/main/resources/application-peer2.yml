@@ -1,15 +1,12 @@
 spring:
   application:
     name: eureka-server
-# See EurekaClientConfigBean
 eureka:
-   instance:
-#     prefer-ip-address: true
-#     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
-     hostname: virtualhost
-   client:
-      register-with-eureka: true
-      serviceUrl:
-          defaultZone: http://host:8761/eureka/
+  instance:
+    #在hosts做映射
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka/
 server:
-   port: 8761
+  port: 8762
