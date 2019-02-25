@@ -1,4 +1,5 @@
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: project['spring-boot.version']
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: project['spring-boot.version']
 }
