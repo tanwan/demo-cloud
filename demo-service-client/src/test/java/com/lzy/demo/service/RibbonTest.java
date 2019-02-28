@@ -20,7 +20,7 @@ import java.util.Map;
  * @author lzy
  * @version v1.0
  */
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = ServerApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = ClientApplication.class)
 @DirtiesContext
 public class RibbonTest {
 
@@ -31,7 +31,9 @@ public class RibbonTest {
      */
     @Test
     public void serverPort(@Autowired RestTemplate restTemplate) {
-        Assertions.assertThat(restTemplate.getForObject(Constants.DEMO_SERVICE_CLIENT + "/port", Integer.class))
+        Integer port = restTemplate.getForObject(Constants.DEMO_SERVICE_SERVER + "/port", Integer.class);
+        System.out.println(port);
+        Assertions.assertThat(port)
                 .isIn(38080, 38081);
     }
 
@@ -43,7 +45,7 @@ public class RibbonTest {
     @Test
     @SuppressWarnings("unchecked")
     public void testGet(@Autowired RestTemplate restTemplate) {
-        Assertions.assertThat(restTemplate.getForObject(Constants.DEMO_SERVICE_CLIENT + "/get/{pathVariable}?requestParam={requestParam}", Map.class, "get", "requestParam"))
+        Assertions.assertThat(restTemplate.getForObject(Constants.DEMO_SERVICE_SERVER + "/get/{pathVariable}?requestParam={requestParam}", Map.class, "get", "requestParam"))
                 .containsEntry("pathVariable", "get").containsEntry("requestParam", "requestParam");
     }
 
@@ -58,7 +60,7 @@ public class RibbonTest {
     public void getPost(@Autowired RestTemplate restTemplate) {
         Map<String, Object> request = new HashMap<>(1);
         request.put("request", "request");
-        Assertions.assertThat(restTemplate.postForObject(Constants.DEMO_SERVICE_CLIENT + "/post/{pathVariable}", request, Map.class, "post"))
+        Assertions.assertThat(restTemplate.postForObject(Constants.DEMO_SERVICE_SERVER + "/post/{pathVariable}", request, Map.class, "post"))
                 .containsEntry("pathVariable", "post").containsEntry("request", "request");
     }
 
@@ -72,7 +74,7 @@ public class RibbonTest {
     public void testPut(@Autowired RestTemplate restTemplate) {
         Map<String, Object> request = new HashMap<>(1);
         request.put("request", "request");
-        Assertions.assertThat(restTemplate.postForObject(Constants.DEMO_SERVICE_CLIENT + "/post/{pathVariable}", request, Map.class, "put"))
+        Assertions.assertThat(restTemplate.postForObject(Constants.DEMO_SERVICE_SERVER + "/post/{pathVariable}", request, Map.class, "put"))
                 .containsEntry("pathVariable", "put").containsEntry("request", "request");
     }
 
@@ -86,7 +88,7 @@ public class RibbonTest {
     public void testDelete(@Autowired RestTemplate restTemplate) {
         Map<String, Object> request = new HashMap<>(1);
         request.put("request", "request");
-        Assertions.assertThat(restTemplate.postForObject(Constants.DEMO_SERVICE_CLIENT + "/post/{pathVariable}", request, Map.class, "delete"))
+        Assertions.assertThat(restTemplate.postForObject(Constants.DEMO_SERVICE_SERVER + "/post/{pathVariable}", request, Map.class, "delete"))
                 .containsEntry("pathVariable", "delete").containsEntry("request", "request");
     }
 }
