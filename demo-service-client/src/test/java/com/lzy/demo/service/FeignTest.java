@@ -3,7 +3,7 @@
  */
 package com.lzy.demo.service;
 
-import com.lzy.demo.service.service.SampleService;
+import com.lzy.demo.service.service.SampleFeignService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,29 +28,29 @@ public class FeignTest {
     /**
      * 从demo-service-client获取端口
      *
-     * @param sampleService the sample serivce
+     * @param sampleFeignService the sample serivce
      */
     @Test
-    public void serverPort(@Autowired SampleService sampleService) {
-        Integer port = sampleService.serverPort();
+    public void serverPort(@Autowired SampleFeignService sampleFeignService) {
+        Integer port = sampleFeignService.serverPort();
         System.out.println(port);
         Assertions.assertThat(port)
-                .isIn(38080, 38081);
+                .isIn(28080, 28081);
     }
 
     /**
      * 测试get
      *
-     * @param sampleService the sample service
+     * @param sampleFeignService the sample service
      */
     @Test
-    public void testGet(@Autowired SampleService sampleService) {
-        Assertions.assertThat(sampleService.getRequest("requestParam", "get"))
+    public void testGet(@Autowired SampleFeignService sampleFeignService) {
+        Assertions.assertThat(sampleFeignService.getRequest("requestParam", "get"))
                 .containsEntry("pathVariable", "get").containsEntry("requestParam", "requestParam");
 
         Map<String, Object> request = new HashMap<>(1);
         request.put("requestParam", "requestParam");
-        Assertions.assertThat(sampleService.getRequest(request, "get"))
+        Assertions.assertThat(sampleFeignService.getRequest(request, "get"))
                 .containsEntry("pathVariable", "get").containsEntry("requestParam", "requestParam");
     }
 
@@ -58,39 +58,39 @@ public class FeignTest {
     /**
      * 测试post
      *
-     * @param sampleService the sample service
+     * @param sampleFeignService the sample service
      */
     @Test
-    public void getPost(@Autowired SampleService sampleService) {
+    public void getPost(@Autowired SampleFeignService sampleFeignService) {
         Map<String, Object> request = new HashMap<>(1);
         request.put("request", "request");
-        Assertions.assertThat(sampleService.postRequest(request, "post"))
+        Assertions.assertThat(sampleFeignService.postRequest(request, "post"))
                 .containsEntry("pathVariable", "post").containsEntry("request", "request");
     }
 
     /**
      * 测试put
      *
-     * @param sampleService the sample service
+     * @param sampleFeignService the sample service
      */
     @Test
-    public void testPut(@Autowired SampleService sampleService) {
+    public void testPut(@Autowired SampleFeignService sampleFeignService) {
         Map<String, Object> request = new HashMap<>(1);
         request.put("request", "request");
-        Assertions.assertThat(sampleService.putRequest(request, "put"))
+        Assertions.assertThat(sampleFeignService.putRequest(request, "put"))
                 .containsEntry("pathVariable", "put").containsEntry("request", "request");
     }
 
     /**
      * 测试delete
      *
-     * @param sampleService the sample service
+     * @param sampleFeignService the sample service
      */
     @Test
-    public void testDelete(@Autowired SampleService sampleService) {
+    public void testDelete(@Autowired SampleFeignService sampleFeignService) {
         Map<String, Object> request = new HashMap<>(1);
         request.put("request", "request");
-        Assertions.assertThat(sampleService.deleteRequest(request, "delete"))
+        Assertions.assertThat(sampleFeignService.deleteRequest(request, "delete"))
                 .containsEntry("pathVariable", "delete").containsEntry("request", "request");
     }
 }

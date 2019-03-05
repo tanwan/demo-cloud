@@ -34,7 +34,7 @@ public class RibbonTest {
         Integer port = restTemplate.getForObject(Constants.DEMO_SERVICE_SERVER + "/port", Integer.class);
         System.out.println(port);
         Assertions.assertThat(port)
-                .isIn(38080, 38081);
+                .isIn(28080, 28081);
     }
 
     /**

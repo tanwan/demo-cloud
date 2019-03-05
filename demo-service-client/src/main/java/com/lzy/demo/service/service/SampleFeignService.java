@@ -3,7 +3,9 @@
  */
 package com.lzy.demo.service.service;
 
+import com.lzy.demo.service.config.FeignFallbackConfig;
 import com.lzy.demo.service.constant.Constants;
+import feign.hystrix.FallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +14,13 @@ import java.util.Map;
 /**
  * 调用feign的service
  * 注解(@RequestParam,@PathVariable)的name不能省略
+ * 如果使用fallbackFactory,那么必须指定configuration
  *
  * @author lzy
  * @version v1.0
  */
-@FeignClient(value = Constants.DEMO_SERVICE_SERVER_NAME)
-public interface SampleService {
+@FeignClient(value = Constants.DEMO_SERVICE_SERVER_NAME, fallbackFactory = FallbackFactory.Default.class, configuration = FeignFallbackConfig.class)
+public interface SampleFeignService {
 
     /**
      * Server port integer.
@@ -25,7 +28,7 @@ public interface SampleService {
      * @return the integer
      */
     @GetMapping("/port")
-    public Integer serverPort();
+    Integer serverPort();
 
     /**
      * Gets request.
