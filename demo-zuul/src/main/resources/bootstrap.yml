@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: demo-zuul
+zuul:
+  routes:
+    #这个随便命名
+    client-api:
+      # 表示以/client-api/**的请求将被路由到demo-service-client处理
+      # 比如:/client-api/feign/port被路由到demo-service-client的/feign/port
+      path: /client-api/**
+      serviceId: demo-service-client
+    server-api:
+      path: /server-api/**
+      serviceId: demo-service-server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 28010

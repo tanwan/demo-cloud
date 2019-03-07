@@ -3,4 +3,6 @@ include 'demo-eureka'
 include 'demo-service-client'
 include 'demo-service-server'
 include 'demo-hystrix-dashboard'
+include 'demo-config-server'
+include 'demo-zuul'
 
