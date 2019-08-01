@@ -1,0 +1,5 @@
+dependencies {
+    implementation group: 'org.apache.zookeeper', name: 'zookeeper', version: project['zookeeper.version']
+    implementation group: 'org.apache.curator', name: 'curator-framework', version: project['curator.version']
+    implementation group: 'org.apache.curator', name: 'curator-recipes', version: project['curator.version']
+}
