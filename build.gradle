@@ -7,7 +7,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
 }
 
 allprojects {
@@ -28,6 +28,8 @@ allprojects {
         //mavenLocal()
         //阿里云镜像
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        //spring仓库,访问https://repo.spring.io/可以查询
+        maven { url 'https://repo.spring.io/milestone' }
         jcenter()
         mavenCentral()
     }

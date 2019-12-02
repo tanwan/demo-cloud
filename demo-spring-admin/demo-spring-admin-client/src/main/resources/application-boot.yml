@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: springboot-admin-client
+  boot:
+    admin:
+      client:
+        url: 'http://localhost:8769'
+server:
+  port: 18080
+
+# spring-admin需要配置这些
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+eureka:
+  client:
+    enabled: false

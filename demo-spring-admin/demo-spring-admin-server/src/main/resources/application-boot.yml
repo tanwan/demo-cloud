@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: springboot-admin-server
+  # 配置邮件服务
+  mail:
+    host:
+    username:
+    password:
+  boot:
+    admin:
+      notify:
+        mail:
+          # 开启邮件通知
+          to: 99156629@qq.com
+server:
+  port: 8769
+eureka:
+  client:
+    enabled: false

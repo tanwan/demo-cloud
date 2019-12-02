@@ -12,4 +12,8 @@ include 'demo-dubbo:demo-dubbo-service-client'
 findProject(':demo-dubbo:demo-dubbo-service-client')?.name = 'demo-dubbo-service-client'
 include 'demo-dubbo:demo-dubbo-service-api'
 findProject(':demo-dubbo:demo-dubbo-service-api')?.name = 'demo-dubbo-service-api'
+include 'demo-spring-admin:demo-spring-admin-server'
+findProject(':demo-spring-admin:demo-spring-admin-server')?.name = 'demo-spring-admin-server'
+include 'demo-spring-admin:demo-spring-admin-client'
+findProject(':demo-spring-admin:demo-spring-admin-client')?.name = 'demo-spring-admin-client'
 
