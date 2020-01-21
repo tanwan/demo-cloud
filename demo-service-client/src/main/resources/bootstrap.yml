@@ -16,3 +16,27 @@ management:
     web:
       exposure:
         include: '*'
+
+---
+# 使用spring config server 使用url
+spring:
+  profiles: spring-cloud-config-url
+  cloud:
+    #See ConfigClientProperties
+    config:
+      name: demo-service-client,business
+      profile: test
+      uri: http://127.0.0.1:28888
+
+---
+# 使用spring config server 使用注册中心
+spring:
+  profiles: spring-cloud-config-discovery
+  cloud:
+    #See ConfigClientProperties
+    config:
+      name: demo-service-client,business
+      profile: test
+      discovery:
+        enabled: true
+        serviceId: demo-config-server

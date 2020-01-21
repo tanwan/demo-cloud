@@ -1,0 +1,6 @@
+---
+spring:
+  profiles: encrypt
+encrypt:
+  # See KeyProperties
+  key: tanwan
