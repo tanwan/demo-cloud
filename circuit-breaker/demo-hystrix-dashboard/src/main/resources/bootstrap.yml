@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: demo-hystrix-dashboard
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:28761/eureka/
+server:
+  port: 26010
+turbine:
+  # See CommonsInstanceDiscovery#getInstanceList
+  # See ClusterMonitorInstanceManager#hostUp
+  # 受监控的微服务
+  app-config: demo-service-client,demo-service-server
+  aggregator:
+    cluster-config:
+      - DEMO-SERVICE-CLIENT
+      - DEMO-SERVICE-SERVER

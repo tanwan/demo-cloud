@@ -1,19 +1,43 @@
 rootProject.name = 'demo-cloud'
-include 'demo-eureka'
-include 'demo-service-client'
-include 'demo-service-server'
-include 'demo-hystrix-dashboard'
-include 'demo-config-server'
-include 'demo-zuul'
-include 'demo-zookeeper'
-include 'demo-dubbo:demo-dubbo-service-server'
-findProject(':demo-dubbo:demo-dubbo-service-server')?.name = 'demo-dubbo-service-server'
-include 'demo-dubbo:demo-dubbo-service-client'
-findProject(':demo-dubbo:demo-dubbo-service-client')?.name = 'demo-dubbo-service-client'
-include 'demo-dubbo:demo-dubbo-service-api'
-findProject(':demo-dubbo:demo-dubbo-service-api')?.name = 'demo-dubbo-service-api'
-include 'demo-spring-admin:demo-spring-admin-server'
-findProject(':demo-spring-admin:demo-spring-admin-server')?.name = 'demo-spring-admin-server'
-include 'demo-spring-admin:demo-spring-admin-client'
-findProject(':demo-spring-admin:demo-spring-admin-client')?.name = 'demo-spring-admin-client'
+// config-server
+findProject(':config-server:demo-spring-config-server')?.name = 'demo-spring-config-server'
+include 'config-server:demo-spring-config-server'
 
+// service-registry
+findProject(':service-registry:demo-eureka')?.name = 'demo-eureka'
+include 'service-registry:demo-eureka'
+
+// gateway
+findProject(':gateway:demo-spring-gateway')?.name = 'demo-spring-gateway'
+include 'gateway:demo-spring-gateway'
+
+findProject(':gateway:demo-zuul')?.name = 'demo-zuul'
+include 'gateway:demo-zuul'
+
+// circuit-breaker
+findProject(':circuit-breaker:demo-hystrix-dashboard')?.name = 'demo-hystrix-dashboard'
+include 'circuit-breaker:demo-hystrix-dashboard'
+
+// service-client
+findProject(':service-client:demo-service-client')?.name = 'demo-service-client'
+include 'service-client:demo-service-client'
+
+// service-server
+findProject(':service-server:demo-service-server')?.name = 'demo-service-server'
+include 'service-server:demo-service-server'
+
+// dubbo
+include 'dubbo:demo-dubbo-service-server'
+findProject(':dubbo:demo-dubbo-service-server')?.name = 'demo-dubbo-service-server'
+include 'dubbo:demo-dubbo-service-client'
+findProject(':demo-dubbo:demo-dubbo-service-client')?.name = 'demo-dubbo-service-client'
+include 'dubbo:demo-dubbo-service-api'
+findProject(':demo-dubbo:demo-dubbo-service-api')?.name = 'demo-dubbo-service-api'
+
+// manager
+include 'manager:demo-spring-admin-server'
+findProject(':manager:demo-spring-admin-server')?.name = 'demo-spring-admin-server'
+
+// composite
+include 'composite:demo-zookeeper'
+findProject(':composite:demo-zookeeper')?.name = 'demo-zookeeper'

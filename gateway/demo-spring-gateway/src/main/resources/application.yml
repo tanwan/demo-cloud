@@ -1,0 +1,10 @@
+server:
+  port: 27020
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: after_route
+          uri: https://example.org
+          predicates:
+            - Cookie=mycookie,mycookievalue

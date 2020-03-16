@@ -1,0 +1,15 @@
+spring:
+   application:
+      name: demo-service-server
+
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: http://127.0.0.1:28761/eureka/
+server:
+   port: 28010
+management:
+   endpoints:
+      web:
+         exposure:
+            include: '*'

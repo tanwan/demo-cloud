@@ -1,0 +1,83 @@
+spring:
+  application:
+    name: demo-service-client
+  cloud:
+    config:
+      enabled: false
+  boot:
+    admin:
+      client:
+        enabled: false
+
+server:
+  port: 28080
+
+# eureka配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:28761/eureka/
+
+# feign配置
+feign:
+  hystrix:
+    enabled: true
+
+# spring-admin需要配置这些
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+---
+# 使用spring config server 使用url
+spring:
+  profiles: spring-cloud-config-url
+  cloud:
+    #See ConfigClientProperties
+    config:
+      name: demo-service-client,business
+      profile: test
+      uri: http://127.0.0.1:28888
+      enabled: true
+
+---
+# 使用spring config server 使用注册中心
+spring:
+  profiles: spring-cloud-config-eureka
+  cloud:
+    #See ConfigClientProperties
+    config:
+      name: demo-service-client,business
+      profile: test
+      discovery:
+        enabled: true
+        serviceId: demo-config-server
+      enabled: true
+
+---
+# spring admin不使用注册中心,如果没有使用spring cloud的话,该配置放到application.yml
+spring:
+  profiles: spring-admin-client-url
+  boot:
+    admin:
+      client:
+        url: 'http://localhost:25010'
+        enabled: true
+eureka:
+  client:
+    enabled: false
+
+---
+# spring admin使用注册中心
+spring:
+  profiles: spring-admin-eureka
+  boot:
+    admin:
+      client:
+        enabled: true
+eureka:
+  client:
+    enabled: true
