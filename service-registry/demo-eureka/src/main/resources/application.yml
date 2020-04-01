@@ -1,3 +1,11 @@
+spring:
+  application:
+    name: eureka-server
+---
+spring:
+  profiles: standalone
+server:
+  port: 28761
 eureka:
    #See EurekaServerConfigBean
    server:
@@ -15,5 +23,27 @@ eureka:
       fetch-registry: false
       serviceUrl:
           defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+---
+spring:
+  profiles: pee1
 server:
-   port: 28761
+  port: 28761
+eureka:
+  instance:
+    #在hosts做映射
+    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://peer2:28762/eureka/
+---
+spring:
+  profiles: pee2
+server:
+  port: 28762
+eureka:
+  instance:
+    #在hosts做映射
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:28761/eureka/
