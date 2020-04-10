@@ -1,0 +1,14 @@
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: project['spring-boot.version']
+    //spring cloud引入的resilience4j版本比较旧,这边暂时不使用
+    //implementation group: 'org.springframework.cloud',name:'spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation group: 'io.github.resilience4j', name: 'resilience4j-spring-cloud2', version: project['resilience4j.version']
+
+    //aop
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: project['spring-boot.version']
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: project['spring-boot.version']
+
+    //spring boot test
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: project['spring-boot.version']
+}

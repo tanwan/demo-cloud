@@ -17,6 +17,8 @@ include 'gateway:demo-zuul'
 // circuit-breaker
 findProject(':circuit-breaker:demo-hystrix-dashboard')?.name = 'demo-hystrix-dashboard'
 include 'circuit-breaker:demo-hystrix-dashboard'
+findProject(':circuit-breaker:demo-resilience4j')?.name = 'demo-resilience4j'
+include 'circuit-breaker:demo-resilience4j'
 
 // service-client
 findProject(':service-client:demo-service-client')?.name = 'demo-service-client'
@@ -41,3 +43,4 @@ findProject(':manager:demo-spring-admin-server')?.name = 'demo-spring-admin-serv
 // composite
 include 'composite:demo-zookeeper'
 findProject(':composite:demo-zookeeper')?.name = 'demo-zookeeper'
+
