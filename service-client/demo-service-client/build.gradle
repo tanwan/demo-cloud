@@ -10,4 +10,21 @@ dependencies {
 
     // spring boot admin
     implementation group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: project['spring-boot-admin.version']
+
+    // spring cloud sleuth
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth'
+
+    // zipkin
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin'
+
+    // rabbitmq
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: project['spring-boot.version']
+
+    // kafka
+    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: project['spring-kafka.version']
+
+    // logstash
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: project['logstash-logback-encoder.version']
+
+
 }

@@ -8,6 +8,12 @@ spring:
     admin:
       client:
         enabled: false
+  zipkin:
+    enabled: false
+  autoconfigure:
+    exclude:
+       - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+       - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
 
 server:
   port: 28080
@@ -17,6 +23,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:28761/eureka/
+    enabled: true
 
 # feign配置
 feign:
@@ -78,6 +85,69 @@ spring:
     admin:
       client:
         enabled: true
-eureka:
-  client:
+
+---
+spring:
+  profiles: sleuth
+---
+spring:
+  profiles: sleuth-zipkin-web
+  zipkin:
     enabled: true
+    #zipkin地址
+    base-url: http://localhost:9411/
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      #采样率
+      probability: 100
+
+
+---
+spring:
+  profiles: sleuth-zipkin-rabbit
+  zipkin:
+    enabled: true
+    sender:
+      type: rabbit
+  sleuth:
+    sampler:
+      #采样率
+      probability: 100
+  rabbitmq:
+    addresses: 127.0.0.1:5672
+    virtual-host: zipkin
+    username: guest
+    password: guest
+  autoconfigure:
+      exclude:
+        - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+---
+spring:
+  profiles: sleuth-zipkin-kafka
+  zipkin:
+    enabled: true
+    sender:
+      type: kafka
+    kafka:
+      topic: zipkin
+  sleuth:
+    sampler:
+      #采样率
+      probability: 100
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+---
+spring:
+  profiles: logstash
+logging:
+  config: classpath:logback-logstash.xml
+---
+spring:
+  profiles: filebeat
+logging:
+  config: classpath:logback-filebeat.xml

@@ -43,4 +43,6 @@ findProject(':manager:demo-spring-admin-server')?.name = 'demo-spring-admin-serv
 // composite
 include 'composite:demo-zookeeper'
 findProject(':composite:demo-zookeeper')?.name = 'demo-zookeeper'
+include 'composite:demo-zipkin-server'
+findProject(':composite:demo-zipkin-server')?.name = 'demo-zipkin-server'
 

@@ -1,0 +1,6 @@
+dependencies {
+    implementation group: 'io.zipkin', name: 'zipkin-server', version: project['zipkin.version']
+
+    //使用rabbitmq收集
+    implementation group: 'io.zipkin.zipkin2', name: 'zipkin-collector-rabbitmq', version: project['zipkin.version']
+}

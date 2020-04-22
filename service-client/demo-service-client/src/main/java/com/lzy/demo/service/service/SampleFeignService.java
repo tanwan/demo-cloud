@@ -19,11 +19,10 @@ import java.util.Map;
  * 1. 使用contextId用来当作此bean的bean名(跟fallbackFactory共用会出错)
  * 2. 配置spring.main.allow-bean-definition-overriding为true
  *
- *
  * @author lzy
  * @version v1.0
  */
-@FeignClient(value = Constants.DEMO_SERVICE_SERVER_NAME,fallbackFactory = FallbackFactory.Default.class, configuration = FeignFallbackConfig.class)
+@FeignClient(value = Constants.DEMO_SERVICE_SERVER_NAME, fallbackFactory = FallbackFactory.Default.class, configuration = FeignFallbackConfig.class)
 public interface SampleFeignService {
 
     /**
@@ -84,4 +83,16 @@ public interface SampleFeignService {
      */
     @PostMapping("/delete/{pathVariable}")
     Map<String, Object> deleteRequest(@RequestBody Map<String, Object> request, @PathVariable("pathVariable") String pathVariable);
+
+    /**
+     * sleuth
+     */
+    @GetMapping("/sleuth")
+    String sleuth();
+
+    /**
+     * sleuth
+     */
+    @GetMapping("/sleuth2")
+    String sleuth2();
 }

@@ -54,6 +54,16 @@ public class FeignFallbackConfig {
             public Map<String, Object> deleteRequest(Map<String, Object> request, String pathVariable) {
                 return null;
             }
+
+            @Override
+            public String sleuth() {
+                return null;
+            }
+
+            @Override
+            public String sleuth2() {
+                return null;
+            }
         });
     }
 }

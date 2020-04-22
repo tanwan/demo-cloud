@@ -11,6 +11,7 @@
 
 ## 降级熔断
 - demo-hystrix-dashboard: 26010
+- demo-resilience4j:26080
 
 ## 客户端
 - demo-dubbo-service-client:
