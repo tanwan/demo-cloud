@@ -46,3 +46,9 @@ spring:
       password: guest
    autoconfigure:
       exclude:
+---
+spring:
+   profiles: hessian
+eureka:
+   client:
+      enabled: false

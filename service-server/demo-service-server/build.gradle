@@ -10,4 +10,7 @@ dependencies {
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin'
     // rabbitmq
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: project['spring-boot.version']
+
+    // hessian
+    implementation group: 'com.caucho', name: 'hessian', version: project['hessian.version']
 }
