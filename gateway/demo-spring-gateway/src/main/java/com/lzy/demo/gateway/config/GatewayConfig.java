@@ -29,9 +29,9 @@ public class GatewayConfig {
     public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("path_route",
-                        r -> r.path("/get/{pathVariable}","/post/{pathVariable}")
-                          .filters(f->f.addResponseHeader("DEMO-REPONSE-HEAD","tanwan"))
-                        .uri("lb://demo-service-server"))
-                        .build();
+                        r -> r.path("/get/{pathVariable}", "/post/{pathVariable}")
+                                .filters(f -> f.addResponseHeader("DEMO-REPONSE-HEAD", "tanwan"))
+                                .uri("lb://demo-service-server"))
+                .build();
     }
 }

@@ -25,8 +25,8 @@
     <!-- 提供服务者的全局配置 -->
     <dubbo:provider timeout="3000"/>
     <!-- 声明需要暴露的服务接口,ref表示spring的bean -->
-    <dubbo:service interface="com.lzy.demo.dubbo.api.SampleService" ref="sampleService" timeout="2000" validation="true">
+    <dubbo:service interface="com.lzy.demo.dubbo.api.SimpleService" ref="simpleService" timeout="2000" validation="true">
         <!-- 用来定义方法级的配置,消费端也可以配置-->
-        <dubbo:method name="sampleService" timeout="1000"/>
+        <dubbo:method name="simpleService" timeout="1000"/>
     </dubbo:service>
 </beans>

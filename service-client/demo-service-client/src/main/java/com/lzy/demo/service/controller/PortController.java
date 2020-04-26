@@ -4,7 +4,7 @@
 package com.lzy.demo.service.controller;
 
 import com.lzy.demo.service.constant.Constants;
-import com.lzy.demo.service.service.SampleFeignService;
+import com.lzy.demo.service.service.SimpleFeignService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +24,7 @@ public class PortController {
     private RestTemplate restTemplate;
 
     @Resource
-    private SampleFeignService sampleFeignService;
+    private SimpleFeignService simpleFeignService;
 
     /**
      * 使用ribbon获取端口
@@ -45,7 +45,7 @@ public class PortController {
      */
     @GetMapping("/feign/port")
     public Integer feignGetPort() {
-        return sampleFeignService.serverPort();
+        return simpleFeignService.serverPort();
     }
 
     /**

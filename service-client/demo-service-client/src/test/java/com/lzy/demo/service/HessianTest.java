@@ -8,7 +8,7 @@ import com.caucho.hessian.io.HessianSerializerOutput;
 import com.caucho.hessian.io.SerializerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lzy.demo.service.bean.HessianMessage;
-import com.lzy.demo.service.service.SampleHessianService;
+import com.lzy.demo.service.service.SimpleHessianService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Hessian test.
+ *
  * @author lzy
  * @version v1.0
  */
@@ -31,13 +33,15 @@ import java.util.Map;
 public class HessianTest {
 
     @Resource
-    private SampleHessianService sampleHessianService;
+    private SimpleHessianService simpleHessianService;
 
     private static final SerializerFactory SERIALIZER_FACTORY = new SerializerFactory();
 
 
     /**
      * 测试序列化
+     *
+     * @throws IOException the io exception
      */
     @Test
     public void testSerializable() throws IOException {
@@ -67,7 +71,7 @@ public class HessianTest {
      */
     @Test
     public void testHessianRPC() {
-        System.out.println(sampleHessianService.sampleHessian(buildHessianMessage()));
+        System.out.println(simpleHessianService.simpleHessian(buildHessianMessage()));
     }
 
     private HessianMessage buildHessianMessage() {

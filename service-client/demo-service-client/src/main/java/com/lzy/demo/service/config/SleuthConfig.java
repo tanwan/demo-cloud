@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * The type Sleuth config.
+ *
  * @author lzy
  * @version v1.0
  */
@@ -30,6 +32,8 @@ public class SleuthConfig {
 
     /**
      * 默认使用HttpRequestParser.DEFAULT
+     *
+     * @return the http request parser
      */
     @Bean(name = {HttpClientRequestParser.NAME, HttpServerRequestParser.NAME})
     public HttpRequestParser sleuthHttpServerRequestParser() {

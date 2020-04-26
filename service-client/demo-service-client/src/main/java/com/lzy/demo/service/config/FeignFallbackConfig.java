@@ -3,7 +3,7 @@
  */
 package com.lzy.demo.service.config;
 
-import com.lzy.demo.service.service.SampleFeignService;
+import com.lzy.demo.service.service.SimpleFeignService;
 import feign.hystrix.FallbackFactory;
 import org.springframework.context.annotation.Bean;
 
@@ -23,8 +23,8 @@ public class FeignFallbackConfig {
      * @return the fallback factory
      */
     @Bean
-    public FallbackFactory<SampleFeignService> feignFallbackFactory() {
-        return new FallbackFactory.Default<>(new SampleFeignService() {
+    public FallbackFactory<SimpleFeignService> feignFallbackFactory() {
+        return new FallbackFactory.Default<>(new SimpleFeignService() {
             @Override
             public Integer serverPort() {
                 return 0;

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author lzy
  * @version v1.0
  */
-public class SampleResponse implements Serializable {
+public class SimpleResponse implements Serializable {
 
     private String response;
 
@@ -23,7 +23,7 @@ public class SampleResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "SampleResponse{" +
+        return "SimpleResponse{" +
                 "response='" + response + '\'' +
                 '}';
     }

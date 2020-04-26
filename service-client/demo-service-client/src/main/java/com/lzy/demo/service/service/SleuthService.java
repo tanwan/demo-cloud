@@ -5,7 +5,6 @@ package com.lzy.demo.service.service;
 
 import brave.Tracing;
 import brave.spring.web.TracingClientHttpRequestInterceptor;
-import com.lzy.demo.service.config.SleuthConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -24,6 +23,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ * The type Sleuth service.
+ *
  * @author lzy
  * @version v1.0
  */
@@ -49,6 +50,9 @@ public class SleuthService {
     private ExecutorService executorService;
 
 
+    /**
+     * Init.
+     */
     @PostConstruct
     public void init() {
         executorService = Executors.newFixedThreadPool(5);
@@ -82,6 +86,8 @@ public class SleuthService {
 
     /**
      * 异步
+     *
+     * @throws InterruptedException the interrupted exception
      */
     @Async
     public void async() throws InterruptedException {
@@ -93,8 +99,8 @@ public class SleuthService {
 
     /**
      * restTemplate
+     *
      * @see TracingClientHttpRequestInterceptor#intercept(org.springframework.http.HttpRequest, byte[], org.springframework.http.client.ClientHttpRequestExecution)
-     * @see SleuthConfig#sleuthHttpServerRequestParser()
      */
     public void restTemplate() {
         //使用new集成sleuth

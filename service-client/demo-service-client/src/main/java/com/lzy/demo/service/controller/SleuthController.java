@@ -5,7 +5,7 @@ package com.lzy.demo.service.controller;
 
 import com.lzy.demo.service.constant.Constants;
 import com.lzy.demo.service.service.BraveService;
-import com.lzy.demo.service.service.SampleFeignService;
+import com.lzy.demo.service.service.SimpleFeignService;
 import com.lzy.demo.service.service.SleuthService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class SleuthController {
     private RestTemplate restTemplate;
 
     @Resource
-    private SampleFeignService sampleFeignService;
+    private SimpleFeignService simpleFeignService;
 
     @Resource
     private SleuthService sleuthService;
@@ -63,13 +63,16 @@ public class SleuthController {
     @GetMapping("/feign")
     public String feign() {
         logger.info("sleuth feign");
-        sampleFeignService.sleuth2();
-        return sampleFeignService.sleuth();
+        simpleFeignService.sleuth2();
+        return simpleFeignService.sleuth();
     }
 
 
     /**
      * 使用@Async
+     *
+     * @return the string
+     * @throws InterruptedException the interrupted exception
      */
     @GetMapping("/async")
     public String async() throws InterruptedException {
@@ -81,6 +84,9 @@ public class SleuthController {
 
     /**
      * 使用线程
+     *
+     * @return the string
+     * @throws InterruptedException the interrupted exception
      */
     @GetMapping("/thread")
     public String thread() throws InterruptedException {
@@ -92,6 +98,8 @@ public class SleuthController {
 
     /**
      * 使用restTemplate
+     *
+     * @return the string
      */
     @GetMapping("/restTemplate")
     public String restTemplate() {
@@ -103,6 +111,8 @@ public class SleuthController {
 
     /**
      * 使用customizing
+     *
+     * @return the string
      */
     @GetMapping("/brave/customizing")
     public String customizing() {

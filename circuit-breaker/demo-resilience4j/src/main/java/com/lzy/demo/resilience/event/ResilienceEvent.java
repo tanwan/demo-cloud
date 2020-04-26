@@ -29,8 +29,7 @@ public class ResilienceEvent {
                 .onIgnoredError(event -> System.out.println("call failed ignore:" + event.toString()))
                 .onReset(event -> System.out.println("circuitBreaker reset:" + event.toString()))
                 .onStateTransition(event -> System.out.println("circuitBreaker change:" + event.toString()))
-                .onCallNotPermitted(event -> System.out.println("circuitBreaker open:" + event.toString()))
-        ;
+                .onCallNotPermitted(event -> System.out.println("circuitBreaker open:" + event.toString()));
     }
 
     /**

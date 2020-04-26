@@ -69,10 +69,10 @@ public class ResilienceTest {
      */
     @BeforeAll
     public void addEvent() {
-        ResilienceEvent.addCircuitBreakerListener(circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND));
-        ResilienceEvent.addRetryListener(retryRegistry.retry(ResilienceService.SAMPLE_BACKEND));
-        ResilienceEvent.addBulkheadListener(bulkheadRegistry.bulkhead(ResilienceService.SAMPLE_BACKEND));
-        ResilienceEvent.addRateLimiterListener(rateLimiterRegistry.rateLimiter(ResilienceService.SAMPLE_BACKEND));
+        ResilienceEvent.addCircuitBreakerListener(circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND));
+        ResilienceEvent.addRetryListener(retryRegistry.retry(ResilienceService.SIMPLE_BACKEND));
+        ResilienceEvent.addBulkheadListener(bulkheadRegistry.bulkhead(ResilienceService.SIMPLE_BACKEND));
+        ResilienceEvent.addRateLimiterListener(rateLimiterRegistry.rateLimiter(ResilienceService.SIMPLE_BACKEND));
     }
 
 
@@ -83,7 +83,7 @@ public class ResilienceTest {
      */
     @RepeatedTest(10)
     public void testException(RepetitionInfo repetitionInfo) {
-        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND);
+        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND);
         if (repetitionInfo.getCurrentRepetition() <= 5) {
             //熔断未打开的时候,抛出IOException
             Assertions.assertThatCode(() -> circuitBreaker.executeCheckedSupplier(() -> resilienceService.exception(IOException.class.getSimpleName())))
@@ -100,7 +100,7 @@ public class ResilienceTest {
      */
     @RepeatedTest(10)
     public void textIgnoreException() {
-        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND);
+        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND);
         Assertions.assertThatCode(() -> circuitBreaker.executeCheckedSupplier(() -> resilienceService.exception(IgnoreException.class.getSimpleName())))
                 .isInstanceOf(IgnoreException.class);
     }
@@ -112,7 +112,7 @@ public class ResilienceTest {
      */
     @RepeatedTest(10)
     public void testFallback() throws IOException {
-        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND);
+        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND);
         Try<String> result = Try.of(circuitBreaker.decorateCheckedSupplier(() -> resilienceService.exception(IOException.class.getSimpleName())))
                 //熔断器打开后的降级
                 .recover(CallNotPermittedException.class, t -> "circuit breaker open")
@@ -129,7 +129,7 @@ public class ResilienceTest {
      */
     @RepeatedTest(10)
     public void testSlowCall(RepetitionInfo repetitionInfo) throws Throwable {
-        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND);
+        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND);
         if (repetitionInfo.getCurrentRepetition() <= 5) {
             //熔断未打开的时候,成功执行
             Assertions.assertThat(circuitBreaker.executeCheckedSupplier(() -> resilienceService.slowCall()))
@@ -151,8 +151,8 @@ public class ResilienceTest {
     public void testRetry() throws IOException {
         Try<String> result = Try.of(Retry
                 .decorateCheckedSupplier(
-                        retryRegistry.retry(ResilienceService.SAMPLE_BACKEND),
-                        circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND)
+                        retryRegistry.retry(ResilienceService.SIMPLE_BACKEND),
+                        circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND)
                                 .decorateCheckedSupplier(() -> resilienceService.retry(IOException.class.getSimpleName()))))
                 //熔断器未打开失败的降级
                 .recover(t -> "retry fallback");
@@ -167,7 +167,7 @@ public class ResilienceTest {
     @RepeatedTest(10)
     public void retryWithCircuitBreaker() throws IOException {
         Try<String> result = Try.of(Retry
-                .decorateCheckedSupplier(retryRegistry.retry(ResilienceService.SAMPLE_BACKEND),
+                .decorateCheckedSupplier(retryRegistry.retry(ResilienceService.SIMPLE_BACKEND),
                         () -> resilienceService.retry(IOException.class.getSimpleName())))
                 //熔断器未打开失败的降级
                 .recover(t -> "retry fallback");
@@ -188,10 +188,10 @@ public class ResilienceTest {
                 .recordException(e -> true)
                 .build();
         //先删除原有的配置
-        circuitBreakerRegistry.find(ResilienceService.SAMPLE_BACKEND)
-                .ifPresent(circuitBreaker -> circuitBreakerRegistry.remove(ResilienceService.SAMPLE_BACKEND));
+        circuitBreakerRegistry.find(ResilienceService.SIMPLE_BACKEND)
+                .ifPresent(circuitBreaker -> circuitBreakerRegistry.remove(ResilienceService.SIMPLE_BACKEND));
         //再添加新的配置
-        circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND, circuitBreakerConfig);
+        circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND, circuitBreakerConfig);
     }
 
     /**
@@ -201,7 +201,7 @@ public class ResilienceTest {
     @Test
     public void testDynamicConfig() {
         changeCircuitBreakerConfig();
-        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND);
+        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND);
         for (int i = 0; i < 2; i++) {
             Assertions.assertThatCode(() -> circuitBreaker.executeCheckedSupplier(() -> resilienceService.exception(IOException.class.getSimpleName())))
                     .isInstanceOf(IOException.class);
@@ -219,7 +219,7 @@ public class ResilienceTest {
      */
     @Test
     public void testBulkhead(ExecutorService executorService) {
-        Bulkhead bulkhead = bulkheadRegistry.bulkhead(ResilienceService.SAMPLE_BACKEND);
+        Bulkhead bulkhead = bulkheadRegistry.bulkhead(ResilienceService.SIMPLE_BACKEND);
         for (int i = 0; i < 10; i++) {
             executorService.submit(() -> {
                 try {
@@ -242,7 +242,7 @@ public class ResilienceTest {
     @Test
     public void testUseSameBulkhead(ExecutorService executorService) {
         //使用同一个舱壁
-        Bulkhead bulkhead = bulkheadRegistry.bulkhead(ResilienceService.SAMPLE_BACKEND);
+        Bulkhead bulkhead = bulkheadRegistry.bulkhead(ResilienceService.SIMPLE_BACKEND);
         for (int i = 0; i < 5; i++) {
             //虽然调用不同的接口,但是因为使用的是同一个舱壁,因此共享同一个并发限制
             executorService.submit(() -> {
@@ -269,7 +269,7 @@ public class ResilienceTest {
      */
     @Test
     public void testThreadPoolBulkhead(ExecutorService executorService) {
-        ThreadPoolBulkhead threadPoolBulkhead = threadPoolBulkheadRegistry.bulkhead(ResilienceService.SAMPLE_BACKEND);
+        ThreadPoolBulkhead threadPoolBulkhead = threadPoolBulkheadRegistry.bulkhead(ResilienceService.SIMPLE_BACKEND);
         for (int i = 0; i < 10; i++) {
             //超过等待队列的将被丢弃
             executorService.submit(() -> {
@@ -285,7 +285,7 @@ public class ResilienceTest {
      */
     @Test
     public void testRateLimit() {
-        RateLimiter rateLimiter = rateLimiterRegistry.rateLimiter(ResilienceService.SAMPLE_BACKEND);
+        RateLimiter rateLimiter = rateLimiterRegistry.rateLimiter(ResilienceService.SIMPLE_BACKEND);
         for (int i = 0; i < 10; i++) {
             Try<String> result = Try.of(RateLimiter.decorateCheckedSupplier(rateLimiter, () -> resilienceService.rateLimit()))
                     //降级
@@ -300,7 +300,7 @@ public class ResilienceTest {
      */
     @AfterEach
     public void showCircuitBreakerStatus() {
-        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SAMPLE_BACKEND);
+        CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(ResilienceService.SIMPLE_BACKEND);
         CircuitBreaker.Metrics metrics = circuitBreaker.getMetrics();
         // 当前失败率,没计算失败率时为-1
         float failureRate = metrics.getFailureRate();

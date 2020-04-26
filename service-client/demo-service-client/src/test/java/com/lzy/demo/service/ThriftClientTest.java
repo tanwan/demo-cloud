@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * The type Thrift client test.
+ *
  * @author lzy
  * @version v1.0
  */
@@ -25,6 +27,8 @@ public class ThriftClientTest {
 
     /**
      * 测试thrift客户端
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testThriftClient() throws Exception {

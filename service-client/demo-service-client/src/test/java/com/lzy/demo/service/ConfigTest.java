@@ -30,6 +30,8 @@ public class ConfigTest {
 
     /**
      * Config bean.
+     *
+     * @throws Exception the exception
      */
     @Test
     public void configBean() throws Exception {

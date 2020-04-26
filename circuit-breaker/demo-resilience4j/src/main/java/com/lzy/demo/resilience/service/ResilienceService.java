@@ -20,9 +20,9 @@ import java.util.concurrent.CompletableFuture;
 public class ResilienceService {
 
     /**
-     * The constant SAMPLE_BACKEND.
+     * The constant SIMPLE_BACKEND.
      */
-    public static final String SAMPLE_BACKEND = "sampleBackend";
+    public static final String SIMPLE_BACKEND = "simpleBackend";
 
     /**
      * 抛出异常

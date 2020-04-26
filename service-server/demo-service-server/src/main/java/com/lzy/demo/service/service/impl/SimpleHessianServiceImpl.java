@@ -4,7 +4,7 @@
 package com.lzy.demo.service.service.impl;
 
 import com.lzy.demo.service.bean.HessianMessage;
-import com.lzy.demo.service.service.SampleHessianService;
+import com.lzy.demo.service.service.SimpleHessianService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * @version v1.0
  */
 @Service
-public class SampleHessianServiceImpl implements SampleHessianService {
+public class SimpleHessianServiceImpl implements SimpleHessianService {
     @Override
-    public HessianMessage sampleHessian(HessianMessage hessianMessage) {
+    public HessianMessage simpleHessian(HessianMessage hessianMessage) {
         return hessianMessage;
     }
 }

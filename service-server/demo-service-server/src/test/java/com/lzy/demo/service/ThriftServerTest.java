@@ -21,6 +21,8 @@ public class ThriftServerTest {
 
     /**
      * thrift服务端
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testThriftServer() throws Exception {

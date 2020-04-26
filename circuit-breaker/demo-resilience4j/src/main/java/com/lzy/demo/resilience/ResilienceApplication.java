@@ -21,6 +21,6 @@ public class ResilienceApplication {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        SpringApplication.run(ResilienceApplication.class,args);
+        SpringApplication.run(ResilienceApplication.class, args);
     }
 }

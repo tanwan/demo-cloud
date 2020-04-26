@@ -43,7 +43,7 @@ resilience4j.circuitbreaker:
       ignoreExceptions:
         - com.lzy.demo.resilience.exception.IgnoreException
   instances:
-    sampleBackend:
+    simpleBackend:
       #默认就是使用default,这边也可以指定配置在resilience4j.circuitbreaker.configs的其它公共配置
       baseConfig: default
 #重试的配置
@@ -58,7 +58,7 @@ resilience4j.retry:
       ignoreExceptions:
         - com.lzy.demo.resilience.exception.IgnoreException
   instances:
-    sampleBackend:
+    simpleBackend:
       baseConfig: default
 
 #舱壁(限制并发数),基于信号量
@@ -71,7 +71,7 @@ resilience4j.bulkhead:
       #等待时间,0表示不等待
       maxWaitDuration: 0
   instances:
-    sampleBackend:
+    simpleBackend:
       baseConfig: default
 #舱壁(限制并发数),基于固定线程池
 resilience4j.thread-pool-bulkhead:
@@ -85,7 +85,7 @@ resilience4j.thread-pool-bulkhead:
       #等待队列,超过等待队列的任务将被丢弃
       queueCapacity: 4
   instances:
-    sampleBackend:
+    simpleBackend:
       baseConfig: default
 #频率限制
 resilience4j.ratelimiter:
@@ -101,5 +101,5 @@ resilience4j.ratelimiter:
       #等待时间,0表示不等待
       timeoutDuration: 0
   instances:
-    sampleBackend:
+    simpleBackend:
       baseConfig: default

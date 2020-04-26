@@ -7,7 +7,7 @@
 package com.lzy.demo.service.thrift;
 
 @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
-public class SampleConstants {
+public class SimpleConstants {
 
   public static final int CONST_VALUE = 10;
 

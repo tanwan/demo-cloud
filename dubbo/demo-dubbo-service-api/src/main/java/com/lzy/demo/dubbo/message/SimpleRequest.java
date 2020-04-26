@@ -7,12 +7,12 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
- * The type Sample request.
+ * The type Simple request.
  *
  * @author lzy
  * @version v1.0
  */
-public class SampleRequest implements Serializable {
+public class SimpleRequest implements Serializable {
 
     @NotEmpty
     private String request;
@@ -27,7 +27,7 @@ public class SampleRequest implements Serializable {
 
     @Override
     public String toString() {
-        return "SampleRequest{" +
+        return "SimpleRequest{" +
                 "request='" + request + '\'' +
                 '}';
     }

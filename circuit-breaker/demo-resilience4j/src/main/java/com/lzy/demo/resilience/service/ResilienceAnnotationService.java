@@ -36,7 +36,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @throws IOException the io exception
      * @see CircuitBreakerAspect
      */
-    @CircuitBreaker(name = ResilienceService.SAMPLE_BACKEND)
+    @CircuitBreaker(name = ResilienceService.SIMPLE_BACKEND)
     @Override
     public String exception(String exception) throws IOException {
         return super.exception(exception);
@@ -50,7 +50,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @throws IOException the io exception
      * @see CircuitBreakerAspect
      */
-    @CircuitBreaker(name = ResilienceService.SAMPLE_BACKEND, fallbackMethod = "exceptionFallback")
+    @CircuitBreaker(name = ResilienceService.SIMPLE_BACKEND, fallbackMethod = "exceptionFallback")
     public String exceptionFallback(String exception) throws IOException {
         return super.exception(exception);
     }
@@ -63,7 +63,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @throws InterruptedException the interrupted exception
      * @see CircuitBreakerAspect
      */
-    @CircuitBreaker(name = ResilienceService.SAMPLE_BACKEND)
+    @CircuitBreaker(name = ResilienceService.SIMPLE_BACKEND)
     @Override
     public String slowCall() throws InterruptedException {
         return super.slowCall();
@@ -77,7 +77,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @throws IOException the io exception
      * @see RetryAspect
      */
-    @Retry(name = ResilienceService.SAMPLE_BACKEND, fallbackMethod = "exceptionFallback")
+    @Retry(name = ResilienceService.SIMPLE_BACKEND, fallbackMethod = "exceptionFallback")
     @Override
     public String retry(String exception) throws IOException {
         return super.retry(exception);
@@ -91,8 +91,8 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @throws IOException the io exception
      * @see RetryAspect
      */
-    @CircuitBreaker(name = ResilienceService.SAMPLE_BACKEND)
-    @Retry(name = ResilienceService.SAMPLE_BACKEND, fallbackMethod = "exceptionFallback")
+    @CircuitBreaker(name = ResilienceService.SIMPLE_BACKEND)
+    @Retry(name = ResilienceService.SIMPLE_BACKEND, fallbackMethod = "exceptionFallback")
     public String retryWithCircuitBreaker(String exception) throws IOException {
         return super.retry(exception);
     }
@@ -104,7 +104,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @see BulkheadAspect
      */
     @Override
-    @Bulkhead(name = ResilienceService.SAMPLE_BACKEND)
+    @Bulkhead(name = ResilienceService.SIMPLE_BACKEND)
     public String bulkhead() throws InterruptedException {
         return super.bulkhead();
     }
@@ -116,7 +116,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @throws InterruptedException the interrupted exception
      * @see BulkheadAspect
      */
-    @Bulkhead(name = ResilienceService.SAMPLE_BACKEND, fallbackMethod = "bulkheadFallback")
+    @Bulkhead(name = ResilienceService.SIMPLE_BACKEND, fallbackMethod = "bulkheadFallback")
     public String bulkheadFallback() throws InterruptedException {
         return super.useSameBulkhead();
     }
@@ -127,7 +127,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      * @return the completable future
      * @see BulkheadAspect
      */
-    @Bulkhead(name = ResilienceService.SAMPLE_BACKEND, fallbackMethod = "threadPoolBulkheadFallback", type = Bulkhead.Type.THREADPOOL)
+    @Bulkhead(name = ResilienceService.SIMPLE_BACKEND, fallbackMethod = "threadPoolBulkheadFallback", type = Bulkhead.Type.THREADPOOL)
     @Override
     public CompletableFuture<String> threadPoolBulkhead() {
         return super.threadPoolBulkhead();
@@ -138,7 +138,7 @@ public class ResilienceAnnotationService extends ResilienceService {
      *
      * @return the string
      */
-    @RateLimiter(name = ResilienceService.SAMPLE_BACKEND, fallbackMethod = "rateLimitFallback")
+    @RateLimiter(name = ResilienceService.SIMPLE_BACKEND, fallbackMethod = "rateLimitFallback")
     @Override
     public String rateLimit() {
         return super.rateLimit();
@@ -190,6 +190,7 @@ public class ResilienceAnnotationService extends ResilienceService {
     /**
      * 限制的降级
      *
+     * @param e the e
      * @return the string
      */
     public String rateLimitFallback(RequestNotPermitted e) {

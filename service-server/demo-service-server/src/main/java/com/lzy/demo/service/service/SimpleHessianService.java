@@ -9,11 +9,11 @@ import com.lzy.demo.service.bean.HessianMessage;
  * @author lzy
  * @version v1.0
  */
-public interface SampleHessianService {
+public interface SimpleHessianService {
 
     /**
      * @param hessianMessage hessianMessage
      * @return hessianMessage
      */
-    HessianMessage sampleHessian(HessianMessage hessianMessage);
+    HessianMessage simpleHessian(HessianMessage hessianMessage);
 }

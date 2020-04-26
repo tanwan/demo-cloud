@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  */
 @ImportResource("classpath:server.xml")
 @ExtendWith(SpringExtension.class)
-@SpringJUnitConfig({ServerXMLTest.class, SampleServiceSpringImpl.class})
+@SpringJUnitConfig({ServerXMLTest.class, SimpleServiceSpringImpl.class})
 public class ServerXMLTest {
 
 

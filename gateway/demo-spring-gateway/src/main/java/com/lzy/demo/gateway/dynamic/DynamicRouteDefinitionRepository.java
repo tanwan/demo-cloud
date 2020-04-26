@@ -69,7 +69,7 @@ public class DynamicRouteDefinitionRepository implements RouteDefinitionReposito
 
     @Override
     public Mono<Void> delete(Mono<String> routeId) {
-        return routeId.flatMap(id -> reactiveStringRedisTemplate.opsForHash().remove(GATEWAY_ROUTES,id)
+        return routeId.flatMap(id -> reactiveStringRedisTemplate.opsForHash().remove(GATEWAY_ROUTES, id)
                 .then(Mono.empty()));
     }
 

@@ -14,7 +14,7 @@ import java.util.Map;
  * @version v1.0
  */
 @RestController
-public class SampleRestController {
+public class SimpleRestController {
 
     /**
      * Gets request.

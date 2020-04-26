@@ -3,7 +3,7 @@
  */
 package com.lzy.demo.service.service.impl;
 
-import com.lzy.demo.service.service.SampleFeignService;
+import com.lzy.demo.service.service.SimpleFeignService;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @version v1.0
  */
 @Service
-public class SampleFeignFallbackService implements SampleFeignService {
+public class SimpleFeignFallbackService implements SimpleFeignService {
     @Override
     public Integer serverPort() {
         return 0;

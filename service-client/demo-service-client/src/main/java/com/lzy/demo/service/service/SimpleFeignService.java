@@ -23,7 +23,7 @@ import java.util.Map;
  * @version v1.0
  */
 @FeignClient(value = Constants.DEMO_SERVICE_SERVER_NAME, fallbackFactory = FallbackFactory.Default.class, configuration = FeignFallbackConfig.class)
-public interface SampleFeignService {
+public interface SimpleFeignService {
 
     /**
      * Server port integer.
@@ -86,12 +86,16 @@ public interface SampleFeignService {
 
     /**
      * sleuth
+     *
+     * @return the string
      */
     @GetMapping("/sleuth")
     String sleuth();
 
     /**
      * sleuth
+     *
+     * @return the string
      */
     @GetMapping("/sleuth2")
     String sleuth2();

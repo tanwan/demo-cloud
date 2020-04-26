@@ -3,7 +3,7 @@
  */
 package com.lzy.demo.service.config;
 
-import com.lzy.demo.service.service.SampleHessianService;
+import com.lzy.demo.service.service.SimpleHessianService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -23,10 +23,10 @@ public class HessianConfig {
     @Bean
     public HessianProxyFactoryBean hessianInvoker() {
         HessianProxyFactoryBean invoker = new HessianProxyFactoryBean();
-        invoker.setServiceUrl("http://localhost:28010/sampleHessianService");
+        invoker.setServiceUrl("http://localhost:28010/simpleHessianService");
         //使用hessian2
         invoker.setHessian2(true);
-        invoker.setServiceInterface(SampleHessianService.class);
+        invoker.setServiceInterface(SimpleHessianService.class);
         return invoker;
     }
 }

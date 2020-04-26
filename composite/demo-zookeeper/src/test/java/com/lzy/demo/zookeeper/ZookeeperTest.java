@@ -50,6 +50,8 @@ public class ZookeeperTest {
 
     /**
      * 测试创建节点
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testCreateNode() throws Exception {
@@ -71,6 +73,8 @@ public class ZookeeperTest {
 
     /**
      * 获取节点信息
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testGetNode() throws Exception {
@@ -93,6 +97,8 @@ public class ZookeeperTest {
 
     /**
      * 列出所有节点
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testListNode() throws Exception {
@@ -106,6 +112,8 @@ public class ZookeeperTest {
 
     /**
      * 更新节点
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testUpdateNode() throws Exception {
@@ -126,6 +134,8 @@ public class ZookeeperTest {
 
     /**
      * 删除节点
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testDeleteNode() throws Exception {

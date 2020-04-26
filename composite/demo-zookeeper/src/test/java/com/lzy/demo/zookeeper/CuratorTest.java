@@ -109,6 +109,8 @@ public class CuratorTest {
 
     /**
      * 测试分布式锁
+     *
+     * @throws Exception the exception
      */
     @Test
     public void testDistributedLock() throws Exception {

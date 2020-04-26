@@ -3,8 +3,8 @@
  */
 package com.lzy.demo.dubbo.client;
 
-import com.lzy.demo.dubbo.api.SampleService;
-import com.lzy.demo.dubbo.message.SampleRequest;
+import com.lzy.demo.dubbo.api.SimpleService;
+import com.lzy.demo.dubbo.message.SimpleRequest;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.junit.jupiter.api.Test;
@@ -30,15 +30,15 @@ public class ClientAnnotationTest {
      * 注解的属性同dubbo:reference
      */
     @Reference(validation = "true")
-    private SampleService sampleService;
+    private SimpleService simpleService;
 
     /**
      * 测试客户端
      */
     @Test
     public void testClient() {
-        SampleRequest sampleRequest = new SampleRequest();
-        sampleRequest.setRequest("request");
-        System.out.println(sampleService.sampleService(sampleRequest));
+        SimpleRequest simpleRequest = new SimpleRequest();
+        simpleRequest.setRequest("request");
+        System.out.println(simpleService.simpleService(simpleRequest));
     }
 }
