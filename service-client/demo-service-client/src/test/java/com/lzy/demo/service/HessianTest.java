@@ -6,6 +6,7 @@ package com.lzy.demo.service;
 import com.caucho.hessian.io.HessianSerializerInput;
 import com.caucho.hessian.io.HessianSerializerOutput;
 import com.caucho.hessian.io.SerializerFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lzy.demo.service.bean.HessianMessage;
 import com.lzy.demo.service.service.SampleHessianService;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,9 @@ public class HessianTest {
         hessianSerializerOutput.flush();
         hessianSerializerOutput.close();
         byte[] bytes = os.toByteArray();
+        System.out.println("hessian byte size:" + bytes.length);
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println("json byte size:" + objectMapper.writeValueAsBytes(hessianMessage).length);
 
         //反序列化
         ByteArrayInputStream is = new ByteArrayInputStream(bytes);
