@@ -7,8 +7,10 @@ import com.caucho.hessian.io.HessianSerializerInput;
 import com.caucho.hessian.io.HessianSerializerOutput;
 import com.caucho.hessian.io.SerializerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lzy.demo.service.bean.ExtendHessianMessage;
 import com.lzy.demo.service.bean.HessianMessage;
 import com.lzy.demo.service.service.SimpleHessianService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -63,6 +65,31 @@ public class HessianTest {
         HessianSerializerInput hessianSerializerInput = new HessianSerializerInput(is);
         hessianSerializerInput.setSerializerFactory(SERIALIZER_FACTORY);
         HessianMessage readHessianMessage = (HessianMessage) hessianSerializerInput.readObject(HessianMessage.class);
+        System.out.println(readHessianMessage);
+    }
+
+    /**
+     * 测试有重写属性的序列化
+     */
+    @Test
+    public void testOverrideSerializable() throws IOException {
+        //序列化
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        ExtendHessianMessage extendHessianMessage = new ExtendHessianMessage();
+        extendHessianMessage.setString("hessian");
+        HessianSerializerOutput hessianSerializerOutput = new HessianSerializerOutput(os);
+        hessianSerializerOutput.setSerializerFactory(SERIALIZER_FACTORY);
+        hessianSerializerOutput.writeObject(extendHessianMessage);
+        hessianSerializerOutput.flush();
+        hessianSerializerOutput.close();
+
+        //反序列化
+        ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
+        HessianSerializerInput hessianSerializerInput = new HessianSerializerInput(is);
+        hessianSerializerInput.setSerializerFactory(SERIALIZER_FACTORY);
+        HessianMessage readHessianMessage = (HessianMessage) hessianSerializerInput.readObject(HessianMessage.class);
+        //如果bean有重写父类属性的,hessian序列化后,此字段会为null
+        Assertions.assertThat(readHessianMessage.getString()).isNull();
         System.out.println(readHessianMessage);
     }
 
