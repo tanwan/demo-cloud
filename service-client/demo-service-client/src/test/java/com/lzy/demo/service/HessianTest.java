@@ -89,6 +89,7 @@ public class HessianTest {
         hessianSerializerInput.setSerializerFactory(SERIALIZER_FACTORY);
         HessianMessage readHessianMessage = (HessianMessage) hessianSerializerInput.readObject(HessianMessage.class);
         //如果bean有重写父类属性的,hessian序列化后,此字段会为null
+        //底层使用unsafe.putObject,因此不会调用set方法,unsafe.putObject在为有重写属性赋值会失败,因此这边字段会为null
         Assertions.assertThat(readHessianMessage.getString()).isNull();
         System.out.println(readHessianMessage);
     }

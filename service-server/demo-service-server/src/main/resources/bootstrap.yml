@@ -3,6 +3,8 @@ spring:
       name: demo-service-server
    autoconfigure:
       exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+   zipkin:
+      enabled: false
 
 eureka:
    client:
